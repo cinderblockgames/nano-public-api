@@ -5,7 +5,7 @@ namespace NanoPublicApi.Entities.Input;
 public abstract class AccountsRequest : Request
 {
     
-    [JsonProperty("account")]
-    public IEnumerable<string> Account { get; set; }
+    [JsonProperty("accounts")]
+    public IEnumerable<string> Accounts { get; set; }
     
 }

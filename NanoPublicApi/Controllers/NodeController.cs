@@ -87,7 +87,7 @@ public class NodeController : Controller
     }
 
     [HttpPost("proxy/account_representative")]
-    //[ProducesResponseType(typeof(AccountRepresentative), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(AccountRepresentative), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> account_representative([FromBody] AccountRepresentativeRequest request)
     {
         request.Action = "account_representative";
@@ -95,7 +95,7 @@ public class NodeController : Controller
     }
 
     [HttpPost("proxy/account_weight")]
-    //[ProducesResponseType(typeof(AccountWeight), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(AccountWeight), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> account_weight([FromBody] AccountWeightRequest request)
     {
         request.Action = "account_weight";
@@ -103,7 +103,7 @@ public class NodeController : Controller
     }
 
     [HttpPost("proxy/accounts_balances")]
-    //[ProducesResponseType(typeof(AccountsBalances), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(AccountsBalances), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> accounts_balances([FromBody] AccountsBalancesRequest request)
     {
         request.Action = "accounts_balances";
@@ -111,7 +111,7 @@ public class NodeController : Controller
     }
 
     [HttpPost("proxy/accounts_frontiers")]
-    //[ProducesResponseType(typeof(AccountsFrontiers), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(AccountsFrontiers), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> accounts_frontiers([FromBody] AccountsFrontiersRequest request)
     {
         request.Action = "accounts_frontiers";
@@ -127,7 +127,7 @@ public class NodeController : Controller
     }
 
     [HttpPost("proxy/accounts_representatives")]
-    //[ProducesResponseType(typeof(AccountsRepresentatives), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(AccountsRepresentatives), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> accounts_representatives([FromBody] AccountsRepresentativesRequest request)
     {
         request.Action = "accounts_representatives";
