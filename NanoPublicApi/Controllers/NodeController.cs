@@ -56,7 +56,7 @@ public class NodeController : Controller
             /* 21 */ nameof(delegators_count) => await delegators_count(To<DelegatorsCountRequest>(request)),
             /* 22 */ nameof(frontier_count) => await frontier_count(To<FrontierCountRequest>(request)),
             /* 23 */ nameof(frontiers) => await frontiers(To<FrontiersRequest>(request)),
-            /* 24 */ 
+            /* 24 */ nameof(receivable) => await receivable(To<ReceivableRequest>(request)),
             /* 25 */ nameof(receivable_exists) => await receivable_exists(To<ReceivableExistsRequest>(request)),
             /* 26 */ nameof(representatives) => await representatives(To<RepresentativesRequest>(request)),
             /* 27 */ nameof(representatives_online) => await representatives_online(To<RepresentativesOnlineRequest>(request)),
@@ -252,12 +252,12 @@ public class NodeController : Controller
         return await Call(nameof(frontiers), request);
     }
 
-    // [HttpPost("proxy/receivable")]
-    // [ProducesResponseType(typeof(Receivable), (int)HttpStatusCode.OK)]
-    // public async Task<IActionResult> receivable([FromBody] ReceivableRequest request)
-    // {
-    //    return await Call(nameof(receivable), request);
-    // }
+    [HttpPost("proxy/receivable")]
+    [ProducesResponseType(typeof(Receivable), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> receivable([FromBody] ReceivableRequest request)
+    {
+       return await Call(nameof(receivable), request);
+    }
 
     [HttpPost("proxy/receivable_exists")]
     [ProducesResponseType(typeof(ReceivableExists), (int)HttpStatusCode.OK)]
