@@ -26,6 +26,6 @@ public class AccountsPendingRequest : AccountsRequest
     public string? Sorting { get; set; }
     
     [JsonProperty("include_only_confirmed", NullValueHandling = NullValueHandling.Ignore), JsonPropertyName("include_only_confirmed")]
-    public IEnumerable<string>? IncludeOnlyConfirmed { get; set; }
+    public string? IncludeOnlyConfirmed { get; set; }
     
 }

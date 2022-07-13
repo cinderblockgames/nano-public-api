@@ -43,11 +43,11 @@ public class NodeController : Controller
             /* 08 */ nameof(account_weight) => await account_weight(To<AccountWeightRequest>(request)),
             /* 09 */ nameof(accounts_balances) => await accounts_balances(To<AccountsBalancesRequest>(request)),
             /* 10 */ nameof(accounts_frontiers) => await accounts_frontiers(To<AccountsFrontiersRequest>(request)),
-            /* 11 */ 
+            /* 11 */ nameof(accounts_pending) => await accounts_pending(To<AccountsPendingRequest>(request)),
             /* 12 */ nameof(accounts_representatives) => await accounts_representatives(To<AccountsRepresentativesRequest>(request)),
             /* 13 */ nameof(available_supply) => await available_supply(To<AvailableSupplyRequest>(request)),
             /* 14 */ nameof(block_account) => await block_account(To<BlockAccountRequest>(request)),
-            /* 15 */ 
+            /* 15 */ nameof(block_hash) => await block_hash(request),
             /* 16 */ nameof(block_info) => await block_info(To<BlockInfoRequest>(request)),
             /* 17 */ nameof(blocks) => await blocks(To<BlocksRequest>(request)),
             /* 18 */ nameof(blocks_info) => await blocks_info(To<BlocksInfoRequest>(request)),
@@ -140,7 +140,7 @@ public class NodeController : Controller
     }
 
     [HttpPost("proxy/accounts_pending")]
-    //[ProducesResponseType(typeof(AccountsPending), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(AccountsPending), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> accounts_pending([FromBody] AccountsPendingRequest request)
     {
         return await Call(nameof(accounts_pending), request);
@@ -167,12 +167,34 @@ public class NodeController : Controller
         return await Call(nameof(block_account), request);
     }
 
-    // [HttpPost("proxy/block_hash")]
-    // [ProducesResponseType(typeof(BlockHash), (int)HttpStatusCode.OK)]
-    // public async Task<IActionResult> block_hash([FromBody] BlockHashRequest request)
-    // {
-    //     return await Call(nameof(block_hash), request);
-    // }
+    #region " block_hash "
+    
+    private async Task<IActionResult> block_hash(string request)
+    {
+        var parsed = To<BlockHashRequest>(request);
+        if (bool.TryParse(parsed.JsonBlock, out bool json) && json) // json_block defaults to false
+        {
+            return await block_hash(To<BlockHashRequest.BlockHashRequest_Json>(request));
+        }
+
+        return await block_hash(To<BlockHashRequest.BlockHashRequest_String>(request));
+    }
+    
+    [HttpPost("proxy/block_hash_string")]
+    [ProducesResponseType(typeof(BlockHash), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> block_hash([FromBody] BlockHashRequest.BlockHashRequest_String request)
+    {
+        return await Call(nameof(block_hash), request);
+    }
+    
+    [HttpPost("proxy/block_hash_json")]
+    [ProducesResponseType(typeof(BlockHash), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> block_hash([FromBody] BlockHashRequest.BlockHashRequest_Json request)
+    {
+        return await Call(nameof(block_hash), request);
+    }
+
+    #endregion
 
     [HttpPost("proxy/block_info")]
     [ProducesResponseType(typeof(BlockInfo), (int)HttpStatusCode.OK)]
