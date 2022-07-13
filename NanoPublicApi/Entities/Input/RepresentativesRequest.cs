@@ -9,10 +9,10 @@ public class RepresentativesRequest : Request
     [DefaultValue("representatives")]
     public override string Action { get; set; }
     
-    [JsonProperty("count")]
+    [JsonProperty("count", NullValueHandling = NullValueHandling.Ignore)]
     public string? Count { get; set; }
     
-    [JsonProperty("sorting")]
+    [JsonProperty("sorting", NullValueHandling = NullValueHandling.Ignore)]
     public string? Sorting { get; set; }
 
 }

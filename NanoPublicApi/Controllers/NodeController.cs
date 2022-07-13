@@ -66,7 +66,7 @@ public class NodeController : Controller
     }
 
     [HttpPost("proxy/account_history")]
-    //[ProducesResponseType(typeof(AccountHistory), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(AccountHistory), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> account_history([FromBody] AccountHistoryRequest request)
     {
         request.Action = "account_history";
@@ -161,13 +161,13 @@ public class NodeController : Controller
     //     return await Node.Proxy(request);
     // }
 
-    // [HttpPost("proxy/block_info")]
-    // [ProducesResponseType(typeof(BlockInfo), (int)HttpStatusCode.OK)]
-    // public async Task<IActionResult> block_info([FromBody] BlockInfoRequest request)
-    // {
-    //     request.Action = "block_info";
-    //     return await Node.Proxy(request);
-    // }
+    [HttpPost("proxy/block_info")]
+    [ProducesResponseType(typeof(BlockInfo), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> block_info([FromBody] BlockInfoRequest request)
+    {
+        request.Action = "block_info";
+        return await Node.Proxy(request);
+    }
 
     // [HttpPost("proxy/blocks")]
     // [ProducesResponseType(typeof(Blocks), (int)HttpStatusCode.OK)]
@@ -185,13 +185,13 @@ public class NodeController : Controller
     //     return await Node.Proxy(request);
     // }
 
-    // [HttpPost("proxy/chain")]
-    // [ProducesResponseType(typeof(Chain), (int)HttpStatusCode.OK)]
-    // public async Task<IActionResult> chain([FromBody] ChainRequest request)
-    // {
-    //     request.Action = "chain";
-    //     return await Node.Proxy(request);
-    // }
+    [HttpPost("proxy/chain")]
+    [ProducesResponseType(typeof(Chain), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> chain([FromBody] ChainRequest request)
+    {
+        request.Action = "chain";
+        return await Node.Proxy(request);
+    }
 
     [HttpPost("proxy/delegators")]
     [ProducesResponseType(typeof(Delegators), (int)HttpStatusCode.OK)]

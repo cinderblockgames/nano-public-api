@@ -9,10 +9,10 @@ public class RepresentativesOnlineRequest : Request
     [DefaultValue("representatives_online")]
     public override string Action { get; set; }
     
-    [JsonProperty("weight")]
+    [JsonProperty("weight", NullValueHandling = NullValueHandling.Ignore)]
     public string? Weight { get; set; }
     
-    [JsonProperty("accounts")]
+    [JsonProperty("accounts", NullValueHandling = NullValueHandling.Ignore)]
     public IEnumerable<string>? Accounts { get; set; }
 
 }

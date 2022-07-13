@@ -9,13 +9,13 @@ public class DelegatorsRequest : AccountRequest
     [DefaultValue("delegators")]
     public override string Action { get; set; }
     
-    [JsonProperty("threshold")]
+    [JsonProperty("threshold", NullValueHandling = NullValueHandling.Ignore)]
     public string? Threshold { get; set; }
     
-    [JsonProperty("count")]
+    [JsonProperty("count", NullValueHandling = NullValueHandling.Ignore)]
     public string? Count { get; set; }
 
-    [JsonProperty("start")]
+    [JsonProperty("start", NullValueHandling = NullValueHandling.Ignore)]
     public string? Start { get; set; }
 
 }
