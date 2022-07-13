@@ -59,8 +59,8 @@ public class NodeController : Controller
             /* 24 */ 
             /* 25 */ nameof(receivable_exists) => await receivable_exists(To<ReceivableExistsRequest>(request)),
             /* 26 */ nameof(representatives) => await representatives(To<RepresentativesRequest>(request)),
-            /* 27 */ 
-            /* 28 */ 
+            /* 27 */ nameof(representatives_online) => await representatives_online(To<RepresentativesOnlineRequest>(request)),
+            /* 28 */ nameof(successors) => await successors(To<SuccessorsRequest>(request)),
             _ => Error(string.IsNullOrWhiteSpace(parsed.Action) ? "missing action" : $"{parsed.Action} not supported")
         };
     }
@@ -280,12 +280,12 @@ public class NodeController : Controller
         return await Call(nameof(representatives_online), request);
     }
 
-    // [HttpPost("proxy/successors")]
-    // [ProducesResponseType(typeof(Successors), (int)HttpStatusCode.OK)]
-    // public async Task<IActionResult> successors([FromBody] SuccessorsRequest request)
-    // {
-    //     return await Call(nameof(successors), request);
-    // }
+    [HttpPost("proxy/successors")]
+    [ProducesResponseType(typeof(Successors), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> successors([FromBody] SuccessorsRequest request)
+    {
+        return await Call(nameof(successors), request);
+    }
 
     #endregion
     
