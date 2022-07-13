@@ -47,5 +47,51 @@ to verify which calls are supported by the instance you are using.
 ### Docker-Compose Example
 
 ```
+version: '3.8'
 
+services:
+
+  node:
+    image: 'nanocurrency/nano:V##.#'
+    networks:
+      - nano
+    ... clipped for brevity ...
+    
+  monitor:
+    image: 'nanotools/nanonodemonitor:v##'
+    networks:
+      - traefik
+      - nano
+    ... clipped for brevity ...
+    
+  api:
+    image: 'cinderblockgames/nano-public-api:V##.#.#'
+    environment:
+      # optional; port on which to listen; default value provided
+      - 'ASPNETCORE_URLS=http://+:2022'
+      # optional; url of node rpc; default value provided
+      - 'NODE=http://node:7076'
+      # optional; opens CORS; default value provided
+      - 'DISABLE_CORS=true'
+      # optional; specifies which calls to remove from support; default value provided
+      - 'EXCLUDED_CALLS=delegators;delegators_count'
+    networks:
+      - traefik
+      - nano
+    deploy:
+      mode: replicated
+      replicas: 2
+      labels:
+        - 'traefik.enable=true'
+        - 'traefik.docker.network=traefik'
+        - 'traefik.http.routers.nano-api.rule=Host(`api.nano.kga.earth`)'
+        - 'traefik.http.routers.nano-api.entrypoints=web-secure'
+        - 'traefik.http.routers.nano-api.tls'
+        - 'traefik.http.services.nano-api.loadbalancer.server.port=2022'
+
+networks:
+  traefik:
+    external: true
+  nano:
+    external: true
 ```
