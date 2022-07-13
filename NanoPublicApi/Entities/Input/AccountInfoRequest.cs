@@ -16,6 +16,9 @@ public class AccountInfoRequest : AccountRequest
     [JsonProperty("weight", NullValueHandling = NullValueHandling.Ignore)]
     public string? Weight { get; set; }
 
+    [JsonProperty("pending", NullValueHandling = NullValueHandling.Ignore)]
+    public string? Pending { get; set; }
+
     [JsonProperty("receivable", NullValueHandling = NullValueHandling.Ignore)]
     public string? Receivable { get; set; }
 

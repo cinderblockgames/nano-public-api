@@ -37,7 +37,7 @@ public class NodeController : Controller
             /* 02 */ nameof(account_block_count) => await account_block_count(To<AccountBlockCountRequest>(request)),
             /* 03 */ nameof(account_get) => await account_get(To<AccountGetRequest>(request)),
             /* 04 */ nameof(account_history) => await account_history(To<AccountHistoryRequest>(request)),
-            /* 05 */ 
+            /* 05 */ nameof(account_info) => await account_info(To<AccountInfoRequest>(request)),
             /* 06 */ nameof(account_key) => await account_key(To<AccountKeyRequest>(request)),
             /* 07 */ nameof(account_representative) => await account_representative(To<AccountRepresentativeRequest>(request)),
             /* 08 */ nameof(account_weight) => await account_weight(To<AccountWeightRequest>(request)),
@@ -50,7 +50,7 @@ public class NodeController : Controller
             /* 15 */ 
             /* 16 */ nameof(block_info) => await block_info(To<BlockInfoRequest>(request)),
             /* 17 */ nameof(blocks) => await blocks(To<BlocksRequest>(request)),
-            /* 18 */ 
+            /* 18 */ nameof(blocks_info) => await blocks_info(To<BlocksInfoRequest>(request)),
             /* 19 */ nameof(chain) => await chain(To<ChainRequest>(request)),
             /* 20 */ 
             /* 21 */ nameof(delegators_count) => await delegators_count(To<DelegatorsCountRequest>(request)),
@@ -108,7 +108,7 @@ public class NodeController : Controller
     }
 
     [HttpPost("proxy/account_info")]
-    //[ProducesResponseType(typeof(AccountInfo), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(AccountInfo), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> account_info([FromBody] AccountInfoRequest request)
     {
         request.Action = "account_info";
@@ -212,7 +212,7 @@ public class NodeController : Controller
     }
 
     [HttpPost("proxy/blocks_info")]
-    //[ProducesResponseType(typeof(BlocksInfo), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(BlocksInfo), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> blocks_info([FromBody] BlocksInfoRequest request)
     {
         request.Action = "blocks_info";
