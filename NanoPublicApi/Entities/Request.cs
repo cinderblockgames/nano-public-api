@@ -4,10 +4,10 @@ using Newtonsoft.Json;
 
 namespace NanoPublicApi.Entities;
 
-public abstract class Request
+public class Request
 {
     
     [JsonProperty("action")]
-    public abstract string Action { get; set; }
+    public virtual string Action { get; set; }
     
 }

@@ -5,7 +5,7 @@ using NanoPublicApi.Connectors;
 using NanoPublicApi.Entities;
 using NanoPublicApi.Entities.Input;
 using NanoPublicApi.Entities.Output;
-using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace NanoPublicApi.Controllers;
 
@@ -27,14 +27,48 @@ public class NodeController : Controller
     #region " Proxy "
     
     [HttpPost("proxy")]
-    public async Task<IActionResult> Proxy([FromBody] JObject request)
+    public async Task<IActionResult> Proxy([FromBody] dynamic json)
     {
-        var parsed = request.ToObject<Request>();
+        var request = json.ToString();
+        var parsed = To<Request>(request);
         return parsed.Action switch
         {
-            nameof(available_supply) => await available_supply(request.ToObject<AvailableSupplyRequest>()),
-            _ => throw new ArgumentOutOfRangeException("action", parsed.Action, "Unsupported action.")
+            /* 01 */ nameof(account_balance) => await account_balance(To<AccountBalanceRequest>(request)),
+            /* 02 */ nameof(account_block_count) => await account_block_count(To<AccountBlockCountRequest>(request)),
+            /* 03 */ nameof(account_get) => await account_get(To<AccountGetRequest>(request)),
+            /* 04 */ nameof(account_history) => await account_history(To<AccountHistoryRequest>(request)),
+            /* 05 */ 
+            /* 06 */ nameof(account_key) => await account_key(To<AccountKeyRequest>(request)),
+            /* 07 */ nameof(account_representative) => await account_representative(To<AccountRepresentativeRequest>(request)),
+            /* 08 */ nameof(account_weight) => await account_weight(To<AccountWeightRequest>(request)),
+            /* 09 */ nameof(accounts_balances) => await accounts_balances(To<AccountsBalancesRequest>(request)),
+            /* 10 */ nameof(accounts_frontiers) => await accounts_frontiers(To<AccountsFrontiersRequest>(request)),
+            /* 11 */ 
+            /* 12 */ nameof(accounts_representatives) => await accounts_representatives(To<AccountsRepresentativesRequest>(request)),
+            /* 13 */ nameof(available_supply) => await available_supply(To<AvailableSupplyRequest>(request)),
+            /* 14 */ nameof(block_account) => await block_account(To<BlockAccountRequest>(request)),
+            /* 15 */ 
+            /* 16 */ nameof(block_info) => await block_info(To<BlockInfoRequest>(request)),
+            /* 17 */ nameof(blocks) => await blocks(To<BlocksRequest>(request)),
+            /* 18 */ 
+            /* 19 */ nameof(chain) => await chain(To<ChainRequest>(request)),
+            /* 20 */ 
+            /* 21 */ nameof(delegators_count) => await delegators_count(To<DelegatorsCountRequest>(request)),
+            /* 22 */ nameof(frontier_count) => await frontier_count(To<FrontierCountRequest>(request)),
+            /* 23 */ nameof(frontiers) => await frontiers(To<FrontiersRequest>(request)),
+            /* 24 */ 
+            /* 25 */ nameof(receivable_exists) => await receivable_exists(To<ReceivableExistsRequest>(request)),
+            /* 26 */ nameof(representatives) => await representatives(To<RepresentativesRequest>(request)),
+            /* 27 */ 
+            /* 28 */ 
+            _ => Json(new { error = $"{parsed.Action} not supported" })
         };
+    }
+
+    private T To<T>(string serialized)
+        where T : Request
+    {
+        return JsonConvert.DeserializeObject<T>(serialized);
     }
     
     #endregion
@@ -169,21 +203,21 @@ public class NodeController : Controller
         return await Node.Proxy(request);
     }
 
-    // [HttpPost("proxy/blocks")]
-    // [ProducesResponseType(typeof(Blocks), (int)HttpStatusCode.OK)]
-    // public async Task<IActionResult> blocks([FromBody] BlocksRequest request)
-    // {
-    //     request.Action = "blocks";
-    //     return await Node.Proxy(request);
-    // }
+    [HttpPost("proxy/blocks")]
+    [ProducesResponseType(typeof(Blocks), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> blocks([FromBody] BlocksRequest request)
+    {
+        request.Action = "blocks";
+        return await Node.Proxy(request);
+    }
 
-    // [HttpPost("proxy/blocks_info")]
-    // [ProducesResponseType(typeof(BlocksInfo), (int)HttpStatusCode.OK)]
-    // public async Task<IActionResult> blocks_info([FromBody] BlocksInfoRequest request)
-    // {
-    //     request.Action = "blocks_info";
-    //     return await Node.Proxy(request);
-    // }
+    [HttpPost("proxy/blocks_info")]
+    //[ProducesResponseType(typeof(BlocksInfo), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> blocks_info([FromBody] BlocksInfoRequest request)
+    {
+        request.Action = "blocks_info";
+        return await Node.Proxy(request);
+    }
 
     [HttpPost("proxy/chain")]
     [ProducesResponseType(typeof(Chain), (int)HttpStatusCode.OK)]

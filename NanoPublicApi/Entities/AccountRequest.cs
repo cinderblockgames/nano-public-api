@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace NanoPublicApi.Entities;
 
-public abstract class AccountRequest : Request
+public class AccountRequest : Request
 {
     
     [JsonProperty("account")]

@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace NanoPublicApi.Entities;
 
-public abstract class HashRequest : Request
+public class HashRequest : Request
 {
     
     [JsonProperty("hash")]
