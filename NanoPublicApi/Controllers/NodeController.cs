@@ -52,7 +52,7 @@ public class NodeController : Controller
             /* 17 */ nameof(blocks) => await blocks(To<BlocksRequest>(request)),
             /* 18 */ nameof(blocks_info) => await blocks_info(To<BlocksInfoRequest>(request)),
             /* 19 */ nameof(chain) => await chain(To<ChainRequest>(request)),
-            /* 20 */ 
+            /* 20 */ nameof(delegators) => await delegators(To<DelegatorsRequest>(request)),
             /* 21 */ nameof(delegators_count) => await delegators_count(To<DelegatorsCountRequest>(request)),
             /* 22 */ nameof(frontier_count) => await frontier_count(To<FrontierCountRequest>(request)),
             /* 23 */ nameof(frontiers) => await frontiers(To<FrontiersRequest>(request)),
