@@ -20,5 +20,6 @@ RUN apt-get update && apt-get install -y curl
 ENV ASPNETCORE_URLS=http://+:2022
 ENV NODE=http://node:7076
 ENV DISABLE_CORS=true
+ENV EXPANDED_LIST=false
 
 CMD [ "dotnet", "NanoPublicApi.dll" ]

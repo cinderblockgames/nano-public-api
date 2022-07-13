@@ -3,10 +3,13 @@ using Newtonsoft.Json;
 
 namespace NanoPublicApi.Entities.Input;
 
-public class BlockAccountRequest : HashRequest
+public class FrontiersRequest : AccountRequest
 {
     
-    [DefaultValue("block_account")]
+    [DefaultValue("frontiers")]
     public override string Action { get; set; }
+    
+    [JsonProperty("count")]
+    public string Count { get; set; }
     
 }

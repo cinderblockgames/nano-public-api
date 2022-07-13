@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace NanoPublicApi.Entities.Input;
+namespace NanoPublicApi.Entities;
 
 public abstract class AccountRequest : Request
 {

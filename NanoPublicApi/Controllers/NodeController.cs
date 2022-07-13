@@ -1,5 +1,6 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using NanoPublicApi.Config;
 using NanoPublicApi.Connectors;
 using NanoPublicApi.Entities;
 using NanoPublicApi.Entities.Input;
@@ -15,10 +16,12 @@ public class NodeController : Controller
 {
     
     private NodeConnector Node { get; }
+    private Options Options { get; }
 
-    public NodeController(NodeConnector node)
+    public NodeController(NodeConnector node, Options options)
     {
         Node = node;
+        Options = options;
     }
     
     #region " Proxy "
@@ -143,7 +146,7 @@ public class NodeController : Controller
     }
 
     [HttpPost("proxy/block_account")]
-    //[ProducesResponseType(typeof(BlockAccount), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(BlockAccount), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> block_account([FromBody] BlockAccountRequest request)
     {
         request.Action = "block_account";
@@ -190,37 +193,38 @@ public class NodeController : Controller
     //     return await Node.Proxy(request);
     // }
 
-    // [HttpPost("proxy/delegators")]
-    // [ProducesResponseType(typeof(Delegators), (int)HttpStatusCode.OK)]
-    // public async Task<IActionResult> delegators([FromBody] DelegatorsRequest request)
-    // {
-    //     request.Action = "delegators";
-    //     return await Node.Proxy(request);
-    // }
+    [HttpPost("proxy/delegators")]
+    [ProducesResponseType(typeof(Delegators), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> delegators([FromBody] DelegatorsRequest request)
+    {
+        request.Action = "delegators";
+        return await Node.Proxy(request);
+    }
 
     [HttpPost("proxy/delegators_count")]
-    //[ProducesResponseType(typeof(DelegatorsCount), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(DelegatorsCount), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> delegators_count([FromBody] DelegatorsCountRequest request)
     {
+        if (!Options.ExpandedList) { return Json(new { error = "delegators_count not supported" }); }
         request.Action = "delegators_count";
         return await Node.Proxy(request);
     }
 
     [HttpPost("proxy/frontier_count")]
-    //[ProducesResponseType(typeof(FrontierCount), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(FrontierCount), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> frontier_count([FromBody] FrontierCountRequest request)
     {
         request.Action = "frontier_count";
         return await Node.Proxy(request);
     }
 
-    // [HttpPost("proxy/frontiers")]
-    // [ProducesResponseType(typeof(Frontiers), (int)HttpStatusCode.OK)]
-    // public async Task<IActionResult> frontiers([FromBody] FrontiersRequest request)
-    // {
-    //     request.Action = "frontiers";
-    //     return await Node.Proxy(request);
-    // }
+    [HttpPost("proxy/frontiers")]
+    [ProducesResponseType(typeof(Frontiers), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> frontiers([FromBody] FrontiersRequest request)
+    {
+        request.Action = "frontiers";
+        return await Node.Proxy(request);
+    }
 
     // [HttpPost("proxy/receivable")]
     // [ProducesResponseType(typeof(Receivable), (int)HttpStatusCode.OK)]
@@ -230,29 +234,29 @@ public class NodeController : Controller
     //     return await Node.Proxy(request);
     // }
 
-    // [HttpPost("proxy/receivable_exists")]
-    // [ProducesResponseType(typeof(ReceivableExists), (int)HttpStatusCode.OK)]
-    // public async Task<IActionResult> receivable_exists([FromBody] ReceivableExistsRequest request)
-    // {
-    //     request.Action = "receivable_exists";
-    //     return await Node.Proxy(request);
-    // }
+    [HttpPost("proxy/receivable_exists")]
+    [ProducesResponseType(typeof(ReceivableExists), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> receivable_exists([FromBody] ReceivableExistsRequest request)
+    {
+        request.Action = "receivable_exists";
+        return await Node.Proxy(request);
+    }
 
     [HttpPost("proxy/representatives")]
-    //[ProducesResponseType(typeof(Representatives), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(Representatives), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> representatives([FromBody] RepresentativesRequest request)
     {
         request.Action = "representatives";
         return await Node.Proxy(request);
     }
 
-    // [HttpPost("proxy/representatives_online")]
-    // [ProducesResponseType(typeof(RepresentativesOnline), (int)HttpStatusCode.OK)]
-    // public async Task<IActionResult> representatives_online([FromBody] RepresentativesOnlineRequest request)
-    // {
-    //     request.Action = "representatives_online";
-    //     return await Node.Proxy(request);
-    // }
+    [HttpPost("proxy/representatives_online")]
+    [ProducesResponseType(typeof(RepresentativesOnline), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> representatives_online([FromBody] RepresentativesOnlineRequest request)
+    {
+        request.Action = "representatives_online";
+        return await Node.Proxy(request);
+    }
 
     // [HttpPost("proxy/successors")]
     // [ProducesResponseType(typeof(Successors), (int)HttpStatusCode.OK)]

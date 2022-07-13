@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using NanoPublicApi.Config;
 using NanoPublicApi.Connectors;
 
 var env = Environment.GetEnvironmentVariables();
@@ -28,6 +29,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton(_ => new NodeConnector(new Uri(node)));
+builder.Services.AddSingleton(_ => new Options { ExpandedList = bool.Parse(env["EXPANDED_LIST"] as string) });
 
 var app = builder.Build();
 
