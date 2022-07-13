@@ -61,7 +61,7 @@ public class NodeController : Controller
             /* 26 */ nameof(representatives) => await representatives(To<RepresentativesRequest>(request)),
             /* 27 */ 
             /* 28 */ 
-            _ => Json(new { error = $"{parsed.Action} not supported" })
+            _ => Error(string.IsNullOrWhiteSpace(parsed.Action) ? "missing action" : $"{parsed.Action} not supported")
         };
     }
 
@@ -239,7 +239,7 @@ public class NodeController : Controller
     [ProducesResponseType(typeof(DelegatorsCount), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> delegators_count([FromBody] DelegatorsCountRequest request)
     {
-        if (!Options.ExpandedList) { return Json(new { error = "delegators_count not supported" }); }
+        if (!Options.ExpandedList) { return Error("delegators_count not supported"); }
         request.Action = "delegators_count";
         return await Node.Proxy(request);
     }
@@ -301,5 +301,10 @@ public class NodeController : Controller
     // }
 
     #endregion
+
+    private JsonResult Error(string error)
+    {
+        return Json(new { error });
+    }
     
 }
