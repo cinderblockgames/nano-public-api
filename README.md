@@ -41,8 +41,8 @@ you would provide https://api.node.example.com/node/proxy and still have access 
 listed above.
 
 NOTE: Not all API instances will provide access to all of the calls listed above; use
-https://api.node.exmaple/api/supported_calls to verify which calls are supported by
-the instance you are using.
+https://api.node.exmaple/api/supported_calls or https://api.node.exmaple/api/excluded_calls
+to verify which calls are supported by the instance you are using.
 
 ### Docker-Compose Example
 

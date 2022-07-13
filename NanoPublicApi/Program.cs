@@ -5,7 +5,10 @@ using NanoPublicApi.Connectors;
 var env = Environment.GetEnvironmentVariables();
 var node = env["NODE"] as string;
 var disableCors = bool.Parse(env["DISABLE_CORS"] as string);
-var excludedCalls = (env["EXCLUDED_CALLS"] as string)?.Split(';') ?? Enumerable.Empty<string>();
+var excludedCalls = (env["EXCLUDED_CALLS"] as string)?.Split(
+        ';',
+        StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries
+    ) ?? Enumerable.Empty<string>();
 
 var builder = WebApplication.CreateBuilder(args);
 
