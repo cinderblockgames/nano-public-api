@@ -74,7 +74,7 @@ services:
       # optional; opens CORS; default value provided
       - 'DISABLE_CORS=true'
       # optional; specifies which calls to remove from support; default value provided
-      - 'EXCLUDED_CALLS=delegators;delegators_count'
+      - 'EXCLUDED_CALLS=delegators;delegators_count;representatives'
     networks:
       - traefik
       - nano
