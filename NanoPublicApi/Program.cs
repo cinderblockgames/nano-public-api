@@ -40,7 +40,7 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
-    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v23.3");
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "V23.3");
     options.RoutePrefix = string.Empty;
 });
 
