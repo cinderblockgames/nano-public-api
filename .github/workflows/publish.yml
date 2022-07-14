@@ -17,6 +17,8 @@ jobs:
           echo ::set-output name=tag::${ref#*_}
           echo ::set-output name=coin::${ref%%_*}
 
+      - run: echo "${GITHUB_REF}"
+      - run: echo "${GITHUB_REF#refs}"
       - run: echo "${{ steps.vars.outputs.tag }}"
       - run: echo "${{ steps.vars.outputs.coin }}"
         
