@@ -52,20 +52,20 @@ version: '3.8'
 services:
 
   node:
-    image: 'nanocurrency/nano:V##.#'
+    image: 'nanocurrency/nano:V#[.#]'
     networks:
       - nano
     ... clipped for brevity ...
     
   monitor:
-    image: 'nanotools/nanonodemonitor:v##'
+    image: 'nanotools/nanonodemonitor:v#'
     networks:
       - traefik
       - nano
     ... clipped for brevity ...
     
   api:
-    image: 'cinderblockgames/nano-public-api:V##.#.#'
+    image: 'cinderblockgames/nano-public-api:V#[.#]_#.#.#'
     environment:
       # optional; port on which to listen; default value provided
       - 'ASPNETCORE_URLS=http://+:2022'
