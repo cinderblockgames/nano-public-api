@@ -11,8 +11,9 @@ jobs:
       - name: Set output
         id: vars
         run: |
-          echo ::set-output name=tag::${GITHUB_REF#*_}
-          echo ::set-output name=coin::echo ${GITHUB_REF%%_*}
+          ref=${GITHUB_REF#*:}
+          echo ::set-output name=tag::${ref#*_}
+          echo ::set-output name=coin::${ref%%_*}
         
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
