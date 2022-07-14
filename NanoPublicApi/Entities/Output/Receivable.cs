@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace NanoPublicApi.Entities.Output;
 
 public class Receivable
@@ -8,5 +10,8 @@ public class Receivable
     {
         public string Amount { get; set; }
         public string Source { get; set; }
+        
+        [JsonPropertyName("min_version")]
+        public string MinVersion { get; set; } 
     }
 }
