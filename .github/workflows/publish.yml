@@ -10,7 +10,8 @@ jobs:
     steps:
       - name: Set output
         id: vars
-        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/} |
+             echo ::set-output name=branch::nano
         
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -29,8 +30,8 @@ jobs:
         uses: docker/build-push-action@v2.4.0
         with:
           platforms: linux/amd64,linux/arm64
-          push: true
-          tags: cinderblockgames/nano-public-api:${{ steps.vars.outputs.tag }}
+          push: false
+          tags: cinderblockgames/${{ steps.vars.outputs.branch }}-public-api:${{ steps.vars.outputs.tag }}
           
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
