@@ -16,10 +16,9 @@ jobs:
           ref=${GITHUB_REF#*:}
           echo ::set-output name=tag::${ref#*_}
           echo ::set-output name=coin::${ref%%_*}
-  
-      - run: echo "$GITHUB_CONTEXT"
-      - run: echo "$tag"
-      - run: echo "$coin"
+
+      - run: echo "${{ steps.vars.outputs.tag }}"
+      - run: echo "${{ steps.vars.outputs.coin }}"
         
 #      - name: Set up QEMU
 #        uses: docker/setup-qemu-action@v1
