@@ -18,6 +18,6 @@ RUN apt-get update && apt-get install -y curl
 ENV ASPNETCORE_URLS=http://+:2022
 ENV NODE=http://node:7072
 ENV DISABLE_CORS=true
-ENV EXCLUDED_CALLS=;
+ENV EXCLUDED_CALLS=representatives;
 
 CMD [ "dotnet", "NanoPublicApi.dll" ]
