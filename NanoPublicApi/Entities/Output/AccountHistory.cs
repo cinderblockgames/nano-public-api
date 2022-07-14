@@ -14,11 +14,18 @@ public class AccountHistory
         public string? Representative { get; set; }
         public string? Link { get; set; }
         public string? Balance { get; set; }
+        
+        [JsonPropertyName("balance_decimal")]
+        public string? BalanceDecimal { get; set; }
+        
         public string? Previous { get; set; }
         public string? Subtype { get; set; }
         public string Account { get; set; }
         public string Amount { get; set; }
         
+        [JsonPropertyName("amount_decimal")]
+        public string? AmountDecimal { get; set; }
+
         [JsonPropertyName("local_timestamp")]
         public string LocalTimestamp { get; set; }
         

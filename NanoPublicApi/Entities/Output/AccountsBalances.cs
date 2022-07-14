@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace NanoPublicApi.Entities.Output;
 
 public class AccountsBalances
@@ -7,7 +9,14 @@ public class AccountsBalances
     public class AccountsBalances_AccountBalance
     {
         public string Balance { get; set; }
+        
+        [JsonPropertyName("balance_decimal")]
+        public string BalanceDecimal { get; set; }
+        
         public string Pending { get; set; }
         public string Receivable { get; set; }
+        
+        [JsonPropertyName("receivable_decimal")]
+        public string ReceivableDecimal { get; set; }
     }
 }

@@ -14,6 +14,9 @@ public class AccountInfo
     
     public string Balance { get; set; }
     
+    [JsonPropertyName("balance_decimal")]
+    public string BalanceDecimal { get; set; }
+    
     [JsonPropertyName("confirmed_balance")]
     public string? ConfirmedBalance { get; set; }
     
@@ -44,12 +47,32 @@ public class AccountInfo
     public string? ConfirmedRepresentative { get; set; }
     
     public string? Weight { get; set; }
-    public string? Pending { get; set; }
-    public string? Receivable { get; set; }
     
+    [JsonPropertyName("weight_decimal")]
+    public string? WeightDecimal { get; set; }
+
+    [JsonPropertyName("weight_decimal_millions")]
+    public string? WeightDecimalMillions { get; set; }
+
+    public string? Pending { get; set; }
+    
+    [JsonPropertyName("pending_decimal")]
+    public string? PendingDecimal { get; set; }
+
+    public string? Receivable { get; set; }
+        
+    [JsonPropertyName("receivable_decimal")]
+    public string? ReceivableDecimal { get; set; }
+
     [JsonPropertyName("confirmed_pending")]
     public string? ConfirmedPending { get; set; }
+
+    [JsonPropertyName("confirmed_pending_decimal")]
+    public string? ConfirmedPendingDecimal { get; set; }
     
     [JsonPropertyName("confirmed_receivable")]
     public string? ConfirmedReceivable { get; set; }
+    
+    [JsonPropertyName("confirmed_receivable_decimal")]
+    public string? ConfirmedReceivableDecimal { get; set; }
 }
