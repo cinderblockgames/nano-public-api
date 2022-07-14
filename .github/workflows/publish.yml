@@ -10,8 +10,9 @@ jobs:
     steps:
       - name: Set output
         id: vars
-        run: echo ::set-output name=tag::${GITHUB_REF#refs/*/} |
-             echo ::set-output name=branch::nano
+        run: |
+          echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+          echo ::set-output name=branch::nano
         
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
