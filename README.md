@@ -52,20 +52,20 @@ version: '3.8'
 services:
 
   node:
-    image: 'bananocoin/banano:V##.#'
+    image: 'bananocoin/banano:V#[.#]'
     networks:
       - banano
     ... clipped for brevity ...
     
   monitor:
-    image: 'nanotools/nanonodemonitor:v##'
+    image: 'nanotools/nanonodemonitor:v#'
     networks:
       - traefik
       - banano
     ... clipped for brevity ...
     
   api:
-    image: 'cinderblockgames/banano-public-api:V##.#.#'
+    image: 'cinderblockgames/banano-public-api:V#[.#]_#.#.#'
     environment:
       # optional; port on which to listen; default value provided
       - 'ASPNETCORE_URLS=http://+:2022'
