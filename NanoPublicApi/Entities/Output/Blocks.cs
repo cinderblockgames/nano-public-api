@@ -13,6 +13,10 @@ public class Blocks
         public string Previous { get; set; }
         public string Representative { get; set; }
         public string Balance { get; set; }
+        
+        [JsonPropertyName("balance_decimal")]
+        public string BalanceDecimal { get; set; }
+        
         public string Link { get; set; }
         
         [JsonPropertyName("link_as_account")]

@@ -16,7 +16,15 @@ public class BlocksInfo
         public string BlockAccount { get; set; }
         
         public string Amount { get; set; }
+        
+        [JsonPropertyName("amount_decimal")]
+        public string AmountDecimal { get; set; }
+        
         public string Balance { get; set; }
+        
+        [JsonPropertyName("balance_decimal")]
+        public string BalanceDecimal { get; set; }
+        
         public string Height { get; set; }
         
         [JsonPropertyName("local_timestamp")]
@@ -39,6 +47,10 @@ public class BlocksInfo
         public string Previous { get; set; }
         public string Representative { get; set; }
         public string Balance { get; set; }
+        
+        [JsonPropertyName("balance_decimal")]
+        public string BalanceDecimal { get; set; }
+
         public string Link { get; set; }
         
         [JsonPropertyName("link_as_account")]

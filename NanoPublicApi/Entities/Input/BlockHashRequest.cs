@@ -48,6 +48,9 @@ public class BlockHashRequest : Request
         [JsonProperty("balance")]
         public string Balance { get; set; }
 
+        [JsonProperty("balance_decimal"), JsonPropertyName("balance_decimal")]
+        public string? BalanceDecimal { get; set; }
+
         [JsonProperty("link")]
         public string Link { get; set; }
         
