@@ -65,7 +65,7 @@ services:
     ... clipped for brevity ...
     
   api:
-    image: 'cinderblockgames/nano-public-api:V##.#.#'
+    image: 'cinderblockgames/banano-public-api:V##.#.#'
     environment:
       # optional; port on which to listen; default value provided
       - 'ASPNETCORE_URLS=http://+:2022'
