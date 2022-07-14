@@ -13,7 +13,7 @@ jobs:
       - name: Set output
         id: vars
         run: |
-          ref=${GITHUB_REF#*:}
+          ref=${GITHUB_REF#refs/*/}
           echo ::set-output name=tag::${ref#*_}
           echo ::set-output name=coin::${ref%%_*}
 
