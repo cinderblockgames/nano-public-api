@@ -1,9 +1,9 @@
-# Nano Public API
-This API sits in front of your Nano node RPC endpoint to provide access to only the public
+# Banano Public API
+This API sits in front of your Banano node RPC endpoint to provide access to only the public
 readonly calls available.  The API excludes all deprecated calls, control calls, calls
 that write to the network, and calls that provide information about the node itself.
 
-The calls available against the v23.3 node are listed below:
+The calls available against the v23 node are listed below:
 
 - [account_balance](https://docs.nano.org/commands/rpc-protocol/#account_balance)
 - [account_block_count](https://docs.nano.org/commands/rpc-protocol/#account_block_count)
@@ -36,7 +36,7 @@ The calls available against the v23.3 node are listed below:
 
 The API provides a [Swagger](https://swagger.io/) interface for ad-hoc requests, but
 it also provides a proxy method that can be used as a replacement for a node in normal
-interfacing.  Basically, instead of providing http://node.example.com:7076 as your RPC endpoint,
+interfacing.  Basically, instead of providing http://node.example.com:7072 as your RPC endpoint,
 you would provide https://api.node.example.com/node/proxy and still have access to the methods
 listed above.
 
@@ -52,16 +52,16 @@ version: '3.8'
 services:
 
   node:
-    image: 'nanocurrency/nano:V##.#'
+    image: 'bananocoin/banano:V##.#'
     networks:
-      - nano
+      - banano
     ... clipped for brevity ...
     
   monitor:
     image: 'nanotools/nanonodemonitor:v##'
     networks:
       - traefik
-      - nano
+      - banano
     ... clipped for brevity ...
     
   api:
@@ -70,28 +70,28 @@ services:
       # optional; port on which to listen; default value provided
       - 'ASPNETCORE_URLS=http://+:2022'
       # optional; url of node rpc; default value provided
-      - 'NODE=http://node:7076'
+      - 'NODE=http://node:7072'
       # optional; opens CORS; default value provided
       - 'DISABLE_CORS=true'
       # optional; specifies which calls to remove from support; default value provided
-      - 'EXCLUDED_CALLS=delegators;delegators_count'
+      - 'EXCLUDED_CALLS=;'
     networks:
       - traefik
-      - nano
+      - banano
     deploy:
       mode: replicated
       replicas: 2
       labels:
         - 'traefik.enable=true'
         - 'traefik.docker.network=traefik'
-        - 'traefik.http.routers.nano-api.rule=Host(`api.nano.kga.earth`)'
-        - 'traefik.http.routers.nano-api.entrypoints=web-secure'
-        - 'traefik.http.routers.nano-api.tls'
-        - 'traefik.http.services.nano-api.loadbalancer.server.port=2022'
+        - 'traefik.http.routers.banano-api.rule=Host(`api.banano.kga.earth`)'
+        - 'traefik.http.routers.banano-api.entrypoints=web-secure'
+        - 'traefik.http.routers.banano-api.tls'
+        - 'traefik.http.services.banano-api.loadbalancer.server.port=2022'
 
 networks:
   traefik:
     external: true
-  nano:
+  banano:
     external: true
 ```

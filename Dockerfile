@@ -16,8 +16,8 @@ COPY --from=build-env /app/NanoPublicApi/out .
 RUN apt-get update && apt-get install -y curl
 
 ENV ASPNETCORE_URLS=http://+:2022
-ENV NODE=http://node:7076
+ENV NODE=http://node:7072
 ENV DISABLE_CORS=true
-ENV EXCLUDED_CALLS=delegators;delegators_count
+ENV EXCLUDED_CALLS=;
 
 CMD [ "dotnet", "NanoPublicApi.dll" ]
