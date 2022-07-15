@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace NanoPublicApi.Entities.Input;
 
-public class FrontiersRequest : AccountRequest
+public class FrontiersRequest : AccountRequest, ICountRequest
 {
     
     [DefaultValue("frontiers")]

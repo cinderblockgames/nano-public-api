@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace NanoPublicApi.Entities.Input;
 
-public class RepresentativesRequest : Request
+public class RepresentativesRequest : Request, ICountRequest
 {
     
     [DefaultValue("representatives")]

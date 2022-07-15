@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace NanoPublicApi.Entities.Input;
 
-public class ReceivableRequest : AccountRequest
+public class ReceivableRequest : AccountRequest, ICountRequest
 {
     
     [DefaultValue("receivable")]

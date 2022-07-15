@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace NanoPublicApi.Entities.Input;
 
-public class AccountsPendingRequest : AccountsRequest
+public class AccountsPendingRequest : AccountsRequest, ICountRequest
 {
     
     [DefaultValue("accounts_pending_request")]

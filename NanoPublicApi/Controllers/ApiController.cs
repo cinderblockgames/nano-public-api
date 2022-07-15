@@ -1,7 +1,9 @@
 using System.Net;
 using System.Reflection;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using NanoPublicApi.Config;
+using Newtonsoft.Json;
 
 namespace NanoPublicApi.Controllers;
 
@@ -37,6 +39,18 @@ public class ApiController : Controller
     
     #endregion
 
+    [HttpGet("api_info")]
+    [ProducesResponseType(typeof(AggregatedApiInfo), (int)HttpStatusCode.OK)]
+    public IActionResult ApiInfo()
+    {
+        return Json(new AggregatedApiInfo
+        {
+            ExcludedCalls = AllCalls.Intersect(Options.ExcludedCalls),
+            SupportedCalls = AllCalls.Except(Options.ExcludedCalls),
+            MaxCount = Options.MaxCount
+        });
+    }
+
     [HttpGet("excluded_calls")]
     [ProducesResponseType(typeof(IEnumerable<string>), (int)HttpStatusCode.OK)]
     public IActionResult ExcludedCalls()
@@ -50,5 +64,28 @@ public class ApiController : Controller
     {
         return Json(AllCalls.Except(Options.ExcludedCalls));
     }
+
+    [HttpGet("max_count")]
+    [ProducesResponseType(typeof(int), (int)HttpStatusCode.OK)]
+    public IActionResult MaxCount()
+    {
+        return Json(Options.MaxCount);
+    }
+    
+    #region " AggregatedApiInfo "
+
+    public class AggregatedApiInfo
+    {
+        [JsonPropertyName("excluded_calls")]
+        public IEnumerable<string> ExcludedCalls { get; set; }
+        
+        [JsonPropertyName("supported_calls")]
+        public IEnumerable<string> SupportedCalls { get; set; }
+        
+        [JsonPropertyName("max_count")]
+        public int MaxCount { get; set; }
+    }
+    
+    #endregion
     
 }

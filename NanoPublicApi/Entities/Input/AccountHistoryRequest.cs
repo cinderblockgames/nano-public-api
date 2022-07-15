@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace NanoPublicApi.Entities.Input;
 
-public class AccountHistoryRequest : AccountRequest
+public class AccountHistoryRequest : AccountRequest, ICountRequest
 {
     
     [DefaultValue("account_history")]

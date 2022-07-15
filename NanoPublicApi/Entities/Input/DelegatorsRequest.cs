@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace NanoPublicApi.Entities.Input;
 
-public class DelegatorsRequest : AccountRequest
+public class DelegatorsRequest : AccountRequest, ICountRequest
 {
     
     [DefaultValue("delegators")]

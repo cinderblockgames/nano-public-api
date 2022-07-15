@@ -301,6 +301,14 @@ public class NodeController : Controller
         where T : Request
     {
         if (Options.ExcludedCalls.Contains(name)) { return Error($"{name} not supported"); }
+        if (Options.MaxCount > 0 && request is ICountRequest countable)
+        {
+            if (!int.TryParse(countable.Count, out int count) || count < 0 || count > Options.MaxCount)
+            {
+                return Error($"{count} greater than max count {Options.MaxCount}");
+            }
+        }
+        
         request.Action = name;
         return await Node.Proxy(request);
     }

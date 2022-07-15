@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace NanoPublicApi.Entities.Input;
 
-public class ChainRequest : Request
+public class ChainRequest : Request, ICountRequest
 {
     
     [DefaultValue("chain")]
