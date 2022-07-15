@@ -75,6 +75,8 @@ services:
       - 'DISABLE_CORS=true'
       # optional; specifies which calls to remove from support; default value provided
       - 'EXCLUDED_CALLS=representatives;'
+      # optional; specifices a maximum value for count; -1 for no limit; default value provided
+      - 'MAX_COUNT=500'
     networks:
       - traefik
       - banano

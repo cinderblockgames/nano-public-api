@@ -19,5 +19,6 @@ ENV ASPNETCORE_URLS=http://+:2022
 ENV NODE=http://node:7072
 ENV DISABLE_CORS=true
 ENV EXCLUDED_CALLS=representatives;
+ENV MAX_COUNT=500
 
 CMD [ "dotnet", "NanoPublicApi.dll" ]

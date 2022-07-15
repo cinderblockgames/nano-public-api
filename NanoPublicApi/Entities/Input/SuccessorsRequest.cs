@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace NanoPublicApi.Entities.Input;
 
-public class SuccessorsRequest : Request
+public class SuccessorsRequest : Request, ICountRequest
 {
     
     [DefaultValue("successors")]
