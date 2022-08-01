@@ -305,7 +305,10 @@ public class NodeController : Controller
         {
             if (!int.TryParse(countable.Count, out int count) || count < 0 || count > Options.MaxCount)
             {
-                return Error($"{count} greater than max count {Options.MaxCount}");
+                return Error(
+                    count > 0
+                    ? $"{count} greater than max count {Options.MaxCount}"
+                    : $"Count must be {Options.MaxCount} or lower.");
             }
         }
         
