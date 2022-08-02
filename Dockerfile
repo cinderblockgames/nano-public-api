@@ -20,5 +20,6 @@ ENV NODE=http://node:7076
 ENV DISABLE_CORS=true
 ENV EXCLUDED_CALLS=delegators;delegators_count;representatives
 ENV MAX_COUNT=500
+ENV SUPPORT_PROCESS=false
 
 CMD [ "dotnet", "NanoPublicApi.dll" ]

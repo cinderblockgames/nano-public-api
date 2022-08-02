@@ -1,7 +1,8 @@
 # Nano Public API
 This API sits in front of your Nano node RPC endpoint to provide access to only the public
 readonly calls available.  The API excludes all deprecated calls, control calls, calls
-that write to the network, and calls that provide information about the node itself.
+that write to the network, and calls that provide information about the node
+itself.<sup>[[1]](https://github.com/cinderblockgames/nano-public-api#footnotes)</sup>
 
 The calls available against the v23.3 node are listed below:
 
@@ -28,8 +29,8 @@ The calls available against the v23.3 node are listed below:
 - [delegators_count](https://docs.nano.org/commands/rpc-protocol/#delegators_count)
 - [frontier_count](https://docs.nano.org/commands/rpc-protocol/#frontier_count)
 - [frontiers](https://docs.nano.org/commands/rpc-protocol/#frontiers)
-- [receivable](https://docs.nano.org/commands/rpc-protocol/#receivable)
-- [receivable_exists](https://docs.nano.org/commands/rpc-protocol/#receivable_exists)
+- [receivable](https://docs.nano.org/commands/rpc-protocol/#receivable)<sup>[[2]](https://github.com/cinderblockgames/nano-public-api#footnotes)</sup>
+- [receivable_exists](https://docs.nano.org/commands/rpc-protocol/#receivable_exists)<sup>[[2]](https://github.com/cinderblockgames/nano-public-api#footnotes)</sup>
 - [representatives](https://docs.nano.org/commands/rpc-protocol/#representatives)
 - [representatives_online](https://docs.nano.org/commands/rpc-protocol/#representatives_online)
 - [successors](https://docs.nano.org/commands/rpc-protocol/#successors)
@@ -41,8 +42,9 @@ you would provide https://api.node.example.com/node/proxy and still have access 
 listed above.
 
 NOTE: Not all API instances will provide access to all of the calls listed above; use
-https://api.node.exmaple/api/supported_calls or https://api.node.exmaple/api/excluded_calls
-to verify which calls are supported by the instance you are using.
+`/api/supported_calls` or `/api/excluded_calls`
+to verify which calls are supported by the instance you are
+using.<sup>[[1]](https://github.com/cinderblockgames/nano-public-api#footnotes)</sup>
 
 ### Docker-Compose Example
 
@@ -77,6 +79,8 @@ services:
       - 'EXCLUDED_CALLS=delegators;delegators_count;representatives'
       # optional; specifices a maximum value for count; -1 for no limit; default value provided
       - 'MAX_COUNT=500'
+      # optional; specifies whether to allow process calls through /node/proxy
+      - 'SUPPORT_PROCESS=false'
     networks:
       - traefik
       - nano
@@ -97,3 +101,7 @@ networks:
   nano:
     external: true
 ```
+
+### Footnotes
+<sup>[1] The API does allow you to specify that you want to support the [process](https://docs.nano.org/commands/rpc-protocol/#process) call via the `SUPPORT_PROCESS` environment variable.  You can check for `process` support by calling `/api/api_info` and looking for `supports_process`.</sup>  
+<sup>[2] [pending](https://docs.nano.org/commands/rpc-protocol/#pending) and [pending_exists](https://docs.nano.org/commands/rpc-protocol/#pending_exists) are also supported to provide support for [Nano.Net](https://github.com/miguel1117/Nano.Net), but they map to [receivable](https://docs.nano.org/commands/rpc-protocol/#receivable) and [receivable_exists](https://docs.nano.org/commands/rpc-protocol/#receivable_exists).</sup> 

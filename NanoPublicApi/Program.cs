@@ -12,6 +12,8 @@ var excludedCalls = env["EXCLUDED_CALLS"]?.Split(
 var maxCount = int.Parse(env["MAX_COUNT"]);
 if (maxCount == 0) { maxCount = -1; }
 
+var supportProcess = bool.Parse(env["SUPPORT_PROCESS"]);
+
 var builder = WebApplication.CreateBuilder(args);
 
 if (disableCors)
@@ -39,7 +41,8 @@ builder.Services.AddSingleton(_ =>
     new Options
     {
         ExcludedCalls = excludedCalls,
-        MaxCount = maxCount
+        MaxCount = maxCount,
+        SupportProcess = supportProcess
     });
 
 var app = builder.Build();
