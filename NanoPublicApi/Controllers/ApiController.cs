@@ -47,7 +47,8 @@ public class ApiController : Controller
         {
             ExcludedCalls = AllCalls.Intersect(Options.ExcludedCalls),
             SupportedCalls = AllCalls.Except(Options.ExcludedCalls),
-            MaxCount = Options.MaxCount
+            MaxCount = Options.MaxCount,
+            SupportsProcess = Options.SupportProcess
         });
     }
 
@@ -84,6 +85,9 @@ public class ApiController : Controller
         
         [JsonPropertyName("max_count")]
         public int MaxCount { get; set; }
+        
+        [JsonPropertyName("supports_process")]
+        public bool SupportsProcess { get; set; }
     }
     
     #endregion

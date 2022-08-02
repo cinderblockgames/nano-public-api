@@ -56,11 +56,16 @@ public class NodeController : Controller
             /* 21 */ nameof(delegators_count) => await delegators_count(To<DelegatorsCountRequest>(request)),
             /* 22 */ nameof(frontier_count) => await frontier_count(To<FrontierCountRequest>(request)),
             /* 23 */ nameof(frontiers) => await frontiers(To<FrontiersRequest>(request)),
-            /* 24 */ nameof(receivable) => await receivable(To<ReceivableRequest>(request)),
+            /* 24 */ nameof(receivable) => await receivable(To<ReceivableRequest>(request)), 
+                              "pending" => await receivable(To<ReceivableRequest>(request)),
             /* 25 */ nameof(receivable_exists) => await receivable_exists(To<ReceivableExistsRequest>(request)),
+                              "pending_exists" => await receivable_exists(To<ReceivableExistsRequest>(request)),
             /* 26 */ nameof(representatives) => await representatives(To<RepresentativesRequest>(request)),
             /* 27 */ nameof(representatives_online) => await representatives_online(To<RepresentativesOnlineRequest>(request)),
             /* 28 */ nameof(successors) => await successors(To<SuccessorsRequest>(request)),
+            
+            "process" => await process(request),
+            
             _ => Error(string.IsNullOrWhiteSpace(parsed.Action) ? "missing action" : $"{parsed.Action} not supported")
         };
     }
@@ -252,6 +257,31 @@ public class NodeController : Controller
         return await Call(nameof(frontiers), request);
     }
 
+    #region " process "
+
+    private async Task<IActionResult> process(string request)
+    {
+        var parsed = To<ProcessRequest>(request);
+        if (bool.TryParse(parsed.JsonBlock, out bool json) && json) // json_block defaults to false
+        {
+            return await process(To<ProcessRequest.ProcessRequest_Json>(request));
+        }
+
+        return await process(To<ProcessRequest.ProcessRequest_String>(request));
+    }
+
+    private async Task<IActionResult> process(ProcessRequest.ProcessRequest_String request)
+    {
+        return await Call(nameof(process), request);
+    }
+
+    private async Task<IActionResult> process(ProcessRequest.ProcessRequest_Json request)
+    {
+        return await Call(nameof(process), request);
+    }
+
+    #endregion
+    
     [HttpPost("proxy/receivable")]
     [ProducesResponseType(typeof(Receivable), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> receivable([FromBody] ReceivableRequest request)
@@ -300,15 +330,27 @@ public class NodeController : Controller
     private async Task<IActionResult> Call<T>(string name, T request)
         where T : Request
     {
-        if (Options.ExcludedCalls.Contains(name)) { return Error($"{name} not supported"); }
+        if (Options.ExcludedCalls.Contains(name))
+        {
+            return Error($"{name} not supported");
+        }
+
+        if (!Options.SupportProcess && string.Equals(name, "process", StringComparison.OrdinalIgnoreCase))
+        {
+            return Error($"{name} not supported");
+        }
+
         if (Options.MaxCount > 0 && request is ICountRequest countable)
         {
             if (!int.TryParse(countable.Count, out int count) || count < 0 || count > Options.MaxCount)
             {
-                return Error($"{count} greater than max count {Options.MaxCount}");
+                return Error(
+                    count > 0
+                        ? $"{count} greater than max count {Options.MaxCount}"
+                        : $"Count must be {Options.MaxCount} or lower.");
             }
         }
-        
+
         request.Action = name;
         return await Node.Proxy(request);
     }

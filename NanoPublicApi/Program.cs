@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json.Serialization;
 using NanoPublicApi.Config;
 using NanoPublicApi.Connectors;
@@ -13,6 +11,7 @@ var excludedCalls = env["EXCLUDED_CALLS"]?.Split(
 ) ?? Enumerable.Empty<string>();
 var maxCount = int.Parse(env["MAX_COUNT"]);
 if (maxCount == 0) { maxCount = -1; }
+var supportProcess = bool.Parse(env["SUPPORT_PROCESS"]);
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,7 +40,8 @@ builder.Services.AddSingleton(_ =>
     new Options
     {
         ExcludedCalls = excludedCalls,
-        MaxCount = maxCount
+        MaxCount = maxCount,
+        SupportProcess = supportProcess
     });
 
 var app = builder.Build();
