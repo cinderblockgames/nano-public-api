@@ -4,7 +4,7 @@ readonly calls available.  The API excludes all deprecated calls, control calls,
 that write to the network, and calls that provide information about the node
 itself.<sup>[[1]](https://github.com/cinderblockgames/nano-public-api#footnotes)</sup>
 
-The calls available against the v23.3 node are listed below:
+The calls available against the v24.0 node are listed below:
 
 - [account_balance](https://docs.nano.org/commands/rpc-protocol/#account_balance)
 - [account_block_count](https://docs.nano.org/commands/rpc-protocol/#account_block_count)
@@ -16,7 +16,7 @@ The calls available against the v23.3 node are listed below:
 - [account_weight](https://docs.nano.org/commands/rpc-protocol/#account_weight)
 - [accounts_balances](https://docs.nano.org/commands/rpc-protocol/#accounts_balances)
 - [accounts_frontiers](https://docs.nano.org/commands/rpc-protocol/#accounts_frontiers)
-- [accounts_pending](https://docs.nano.org/commands/rpc-protocol/#accounts_pending)
+- [accounts_receivable](https://docs.nano.org/commands/rpc-protocol/#accounts_receivable)<sup>[[2]](https://github.com/cinderblockgames/nano-public-api#footnotes)</sup>
 - [accounts_representatives](https://docs.nano.org/commands/rpc-protocol/#accounts_representatives)
 - [available_supply](https://docs.nano.org/commands/rpc-protocol/#available_supply)
 - [block_account](https://docs.nano.org/commands/rpc-protocol/#block_account)
@@ -29,8 +29,8 @@ The calls available against the v23.3 node are listed below:
 - [delegators_count](https://docs.nano.org/commands/rpc-protocol/#delegators_count)
 - [frontier_count](https://docs.nano.org/commands/rpc-protocol/#frontier_count)
 - [frontiers](https://docs.nano.org/commands/rpc-protocol/#frontiers)
-- [receivable](https://docs.nano.org/commands/rpc-protocol/#receivable)<sup>[[2]](https://github.com/cinderblockgames/nano-public-api#footnotes)</sup>
-- [receivable_exists](https://docs.nano.org/commands/rpc-protocol/#receivable_exists)<sup>[[2]](https://github.com/cinderblockgames/nano-public-api#footnotes)</sup>
+- [receivable](https://docs.nano.org/commands/rpc-protocol/#receivable)<sup>[[3]](https://github.com/cinderblockgames/nano-public-api#footnotes)</sup>
+- [receivable_exists](https://docs.nano.org/commands/rpc-protocol/#receivable_exists)<sup>[[3]](https://github.com/cinderblockgames/nano-public-api#footnotes)</sup>
 - [representatives](https://docs.nano.org/commands/rpc-protocol/#representatives)
 - [representatives_online](https://docs.nano.org/commands/rpc-protocol/#representatives_online)
 - [successors](https://docs.nano.org/commands/rpc-protocol/#successors)
@@ -104,4 +104,5 @@ networks:
 
 ### Footnotes
 <sup>[1] The API does allow you to specify that you want to support the [process](https://docs.nano.org/commands/rpc-protocol/#process) call via the `SUPPORT_PROCESS` environment variable.  You can check for `process` support by calling `/api/api_info` and looking for `supports_process`.</sup>  
-<sup>[2] [pending](https://docs.nano.org/commands/rpc-protocol/#pending) and [pending_exists](https://docs.nano.org/commands/rpc-protocol/#pending_exists) are also supported to provide support for [Nano.Net](https://github.com/miguel1117/Nano.Net), but they map to [receivable](https://docs.nano.org/commands/rpc-protocol/#receivable) and [receivable_exists](https://docs.nano.org/commands/rpc-protocol/#receivable_exists).</sup> 
+<sup>[2] [accounts_pending](https://docs.nano.org/commands/rpc-protocol/#accounts_pending) is also supported, but it maps to [accounts_receivable](https://docs.nano.org/commands/rpc-protocol/#accounts_receivable).</sup>  
+<sup>[3] [pending](https://docs.nano.org/commands/rpc-protocol/#pending) and [pending_exists](https://docs.nano.org/commands/rpc-protocol/#pending_exists) are also supported to provide support for [Nano.Net](https://github.com/miguel1117/Nano.Net), but they map to [receivable](https://docs.nano.org/commands/rpc-protocol/#receivable) and [receivable_exists](https://docs.nano.org/commands/rpc-protocol/#receivable_exists).</sup> 
