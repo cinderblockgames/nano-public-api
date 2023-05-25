@@ -21,5 +21,8 @@ public class BlocksInfoRequest : HashesRequest
 
     [JsonProperty("include_not_found", NullValueHandling = NullValueHandling.Ignore), JsonPropertyName("include_not_found")]
     public string? IncludeNotFound { get; set; }
+    
+    [JsonProperty("receive_hash", NullValueHandling = NullValueHandling.Ignore), JsonPropertyName("receive_hash")]
+    public string? ReceiveHash { get; set; }
 
 }

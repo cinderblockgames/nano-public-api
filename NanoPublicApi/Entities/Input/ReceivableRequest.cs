@@ -30,5 +30,8 @@ public class ReceivableRequest : AccountRequest, ICountRequest
 
     [JsonProperty("include_only_confirmed", NullValueHandling = NullValueHandling.Ignore), JsonPropertyName("include_only_confirmed")]
     public string? IncludeOnlyConfirmed { get; set; }
+    
+    [JsonProperty("offset", NullValueHandling = NullValueHandling.Ignore)]
+    public string? Offset { get; set; }
 
 }

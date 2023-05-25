@@ -42,7 +42,8 @@ public class NodeController : Controller
             /* 08 */ nameof(account_weight) => await account_weight(To<AccountWeightRequest>(request)),
             /* 09 */ nameof(accounts_balances) => await accounts_balances(To<AccountsBalancesRequest>(request)),
             /* 10 */ nameof(accounts_frontiers) => await accounts_frontiers(To<AccountsFrontiersRequest>(request)),
-            /* 11 */ nameof(accounts_pending) => await accounts_pending(To<AccountsPendingRequest>(request)),
+            /* 11 */ nameof(accounts_receivable) => await accounts_receivable(To<AccountsReceivableRequest>(request)),
+                              "accounts_pending" => await accounts_receivable(To<AccountsReceivableRequest>(request)),
             /* 12 */ nameof(accounts_representatives) => await accounts_representatives(To<AccountsRepresentativesRequest>(request)),
             /* 13 */ nameof(available_supply) => await available_supply(To<AvailableSupplyRequest>(request)),
             /* 14 */ nameof(block_account) => await block_account(To<BlockAccountRequest>(request)),
@@ -143,11 +144,11 @@ public class NodeController : Controller
         return await Call(nameof(accounts_frontiers), request);
     }
 
-    [HttpPost("proxy/accounts_pending")]
-    [ProducesResponseType(typeof(AccountsPending), (int)HttpStatusCode.OK)]
-    public async Task<IActionResult> accounts_pending([FromBody] AccountsPendingRequest request)
+    [HttpPost("proxy/accounts_receivable")]
+    [ProducesResponseType(typeof(AccountsReceivable), (int)HttpStatusCode.OK)]
+    public async Task<IActionResult> accounts_receivable([FromBody] AccountsReceivableRequest request)
     {
-        return await Call(nameof(accounts_pending), request);
+        return await Call(nameof(accounts_receivable), request);
     }
 
     [HttpPost("proxy/accounts_representatives")]

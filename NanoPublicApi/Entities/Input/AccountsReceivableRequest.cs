@@ -4,10 +4,10 @@ using Newtonsoft.Json;
 
 namespace NanoPublicApi.Entities.Input;
 
-public class AccountsPendingRequest : AccountsRequest, ICountRequest
+public class AccountsReceivableRequest : AccountsRequest, ICountRequest
 {
     
-    [DefaultValue("accounts_pending_request")]
+    [DefaultValue("accounts_receivable")]
     public override string Action { get; set; }
     
     [JsonProperty("count")]
