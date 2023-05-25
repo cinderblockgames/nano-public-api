@@ -1,6 +1,10 @@
 using System.Text.Json.Serialization;
+using Microsoft.OpenApi.Models;
 using NanoPublicApi.Config;
 using NanoPublicApi.Connectors;
+
+const string COIN = "BANANO";
+const string VERSION = "V23";
 
 var env = GetEnvironmentVariables();
 var node = env["NODE"];
@@ -33,7 +37,19 @@ builder.Services.AddControllers()
     });
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc(VERSION, new OpenApiInfo
+    {
+        Version = VERSION,
+        Title = $"{COIN} Public API",
+        Contact = new OpenApiContact
+        {
+            Name = "GitHub",
+            Url = new Uri("https://github.com/cinderblockgames/nano-public-api")
+        }
+    });
+});
 
 builder.Services.AddSingleton(_ => new NodeConnector(new Uri(node)));
 builder.Services.AddSingleton(_ =>
@@ -49,8 +65,9 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
-    options.SwaggerEndpoint("/swagger/v1/swagger.json", "V23");
+    options.SwaggerEndpoint($"/swagger/{VERSION}/swagger.json", VERSION);
     options.RoutePrefix = string.Empty;
+    options.DocumentTitle = $"{COIN} Public API - Swagger UI";
 });
 
 app.UseCors();
