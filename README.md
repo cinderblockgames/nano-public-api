@@ -4,7 +4,7 @@ readonly calls available.  The API excludes all deprecated calls, control calls,
 that write to the network, and calls that provide information about the node
 itself.<sup>[[1]](https://github.com/cinderblockgames/nano-public-api#footnotes)</sup>
 
-The calls available against the v25.0 node are listed below:
+The calls available against the v25.1 node are listed below:
 
 - [account_balance](https://docs.nano.org/commands/rpc-protocol/#account_balance)
 - [account_block_count](https://docs.nano.org/commands/rpc-protocol/#account_block_count)
