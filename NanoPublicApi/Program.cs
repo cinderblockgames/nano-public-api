@@ -4,7 +4,7 @@ using NanoPublicApi.Config;
 using NanoPublicApi.Connectors;
 
 const string COIN = "BANANO";
-const string VERSION = "V25";
+const string VERSION = "V25.1";
 
 var env = GetEnvironmentVariables();
 var node = env["NODE"];
